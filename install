@@ -4,7 +4,8 @@ git pull
 echo "Git submodule init"
 git submodule init
 echo "Git submodule update"
-git submodule update
+#git submodule update
+git submodule foreach git pull origin master
 
 cd dot-vim
 ./install
