@@ -1,23 +1,11 @@
 #!/bin/bash
-
-if [ -f ~/.vimrc ]; then
-    echo "~/.vimrc already exists, please remove or move"
-    exit 1
-fi
-
 echo "Git pull"
 git pull
 echo "Git submodule init"
 git submodule init
 echo "Git submodule update"
 git submodule update
+git submodule foreach git pull origin master
 
-if [ ! -L ~/.vimrc ]; then
-    echo "Creating symbolic link .vimrc/ to ~/.vimrc"
-    ln -s .vimrc ~/.vimrc
-fi
-
-if [ ! -L ~/.vim ]; then
-    echo "Creating symbolic link .vimrc/ to ~/.vimrc"
-    ln -s .vim/ ~/.vim
-fi
+cd dot-vim
+./install
