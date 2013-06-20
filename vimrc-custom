@@ -1,3 +1,8 @@
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+python << endpython
+
+import vim
+vim.command('syntax enable')
+vim.command('set background=dark')
+vim.command('colorscheme solarized')
+
+endpython
