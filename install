@@ -1,26 +1,27 @@
 #!/bin/bash
-git clone --recursive git@github.com:letharion/letharion-dot-files.git
+REPO_NAME=letharion-dot-files
+git clone --recursive git@github.com:letharion/${REPO_NAME}.git
 
 cd letharion-dot-files
 git clone git://github.com/altercation/vim-colors-solarized.git
 mv vim-colors-solarized dot-vim/.vim/bundle/
 
-if [ -L ~/.vimrc-custom ]; then
+if [[ -L ~/.vimrc-custom || ! -f ~/.vimrc-custom ]]; then
   echo "Creating symbolic link ~/.vimrc-custom to $PWD/vimrc-custom"
-  ln -s ./vimrc-custom ~/.vimrc-custom
+  ln -s ${REPO_NAME}/vimrc-custom ~/.vimrc-custom
 else
   echo "Skipping link to vimrc-custom as there is a non symlink file there already."
 fi
 
-if [ -f ~/.vimrc ]; then
-  if [ ! -L ~/.vimrc ]; then
+if [[ -f ~/.vimrc ]]; then
+  if [[ ! -L ~/.vimrc ]]; then
     echo "~/.vimrc already exists, and is not a symlink. Please remove or move."
     exit 1
   fi
 fi
 
-if [ -d ~/.vim ]; then
-  if [ ! -L ~/.vimrc ]; then
+if [[ -d ~/.vim ]]; then
+  if [[ ! -L ~/.vimrc ]]; then
     echo "~/.vim already exists, and is not a symlink. Please remove or move."
     exit 1
   fi
