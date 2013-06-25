@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# These commands are not tested to work well cross platform.
+# View them as convenient suggestions, not exact answers.
+
 REPO_NAME=letharion-dot-files
 git clone --recursive git@github.com:letharion/${REPO_NAME}.git
 
@@ -26,3 +30,14 @@ if [[ -d ~/.vim ]]; then
     exit 1
   fi
 fi
+
+wget http://pear2.php.net/pyrus.phar
+php pyrus.phar install pear/PHP_CodeSniffer
+
+# (or pear install PHP_CodeSniffer)
+# as well as the actual Drupal coding standard
+
+cd ~/.vim
+drush dl coder
+# Assuming your pear is installed in /usr/lib/php
+ln -sv /usr/lib/php/pear/ ~/.vimdir/coder/coder_sniffer/Drupal

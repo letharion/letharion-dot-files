@@ -1,20 +1,4 @@
-git clone git@github.com:letharion/letharion-dot-files.git .vimdir
+My dot files, which primarily means vim configuration.
 
-cd .vimdir
-./install
-
-or
-
-ln -s .vimdir/.vim .vim
-ln -s .vimdir/.vimrc .vimrc
-
-# The PHP (and Drupal) error/syntax highlightning requires php code sniffer.
-
-wget http://pear2.php.net/pyrus.phar
-php pyrus.phar install pear/PHP_CodeSniffer
-# (or pear install PHP_CodeSniffer)
-# as well as the actual Drupal coding standard
-
-cd .vim
-drush dl coder
-ln -sv /usr/lib/php/pear/ ~/.vimdir/coder/coder_sniffer/Drupal
+Uses solarized, which is meant to run specifically under a terminal window with
+the same colors. See http://ethanschoonover.com/solarized
