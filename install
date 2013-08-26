@@ -11,24 +11,26 @@ git clone git://github.com/altercation/vim-colors-solarized.git
 mv vim-colors-solarized dot-vim/.vim/bundle/
 
 if [[ -L ~/.vimrc-custom || ! -f ~/.vimrc-custom ]]; then
-  echo "Creating symbolic link ~/.vimrc-custom to $PWD/vimrc-custom"
-  ln -s ${REPO_NAME}/vimrc-custom ~/.vimrc-custom
+  echo "Creating symbolic link ~/.vimrc-custom to $(pwd)/vimrc-custom"
+  ln -s $(pwd)/vimrc-custom ~/.vimrc-custom
 else
   echo "Skipping link to vimrc-custom as there is a non symlink file there already."
 fi
 
-if [[ -f ~/.vimrc ]]; then
-  if [[ ! -L ~/.vimrc ]]; then
-    echo "~/.vimrc already exists, and is not a symlink. Please remove or move."
-    exit 1
-  fi
+if [[ -L ~/.vimrc || ! -f ~/.vimrc ]]; then
+  echo "Creating symbolic link ~/.vimrc to $(pwd)/vimrc"
+  ln -s $(pwd)/dot-vim/.vimrc ~/.vimrc
+else
+  echo "~/.vimrc already exists, and is not a symlink. Please remove or move."
+  exit 1
 fi
 
-if [[ -d ~/.vim ]]; then
-  if [[ ! -L ~/.vimrc ]]; then
-    echo "~/.vim already exists, and is not a symlink. Please remove or move."
-    exit 1
-  fi
+if [[ -L ~/.vim || ! -d ~/.vim ]]; then
+  echo "Creating symbolic link ~/.vim to $(pwd)/dotvim"
+  ln -s $(pwd)/dot-vim/.vim ~/.vim
+else
+   echo "~/.vim already exists, and is not a symlink. Please remove or move."
+  exit 1
 fi
 
 wget http://pear2.php.net/pyrus.phar
